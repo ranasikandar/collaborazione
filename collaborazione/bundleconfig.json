@@ -1,0 +1,44 @@
+﻿[
+  //MAIN LAYOUT BUNDLE
+  //.CSS
+  {
+    "outputFileName": "wwwroot/css/bundle.css",
+    "inputFiles": [
+      "wwwroot/css/bootstrap.min.css",
+      "wwwroot/css/animate.css",
+      "wwwroot/css/font-awesome.min.css",
+      "wwwroot/css/bootstrap-icons.css",
+      "wwwroot/css/style.css"
+    ],
+    "minify": {
+      "enabled": true,
+      "outputMode": "singleLine",
+      "commentMode": "none",
+      "preserveImportantComments": false
+    },
+    "sourceMap": false
+  },
+  //MAIN LAYOUT BUNDLE
+  //.JS
+  {
+    "outputFileName": "wwwroot/js/bundle.js",
+    "inputFiles": [
+      "wwwroot/js/jquery.min.js",
+      //"wwwroot/js/bootstrap.bundle.min.js",
+      "wwwroot/js/internet-status.js",
+      //"wwwroot/lib/wow.min.js",
+      "wwwroot/js/dark-mode-switch.js",
+      "wwwroot/js/active.js",
+      "wwwroot/js/sweetalert.min.js"
+    ],
+    "minify": {
+      "enabled": true,
+      "renameLocals": true,
+      "outputMode": "singleLine",
+      "preserveImportantComments": false
+    },
+    "sourceMap": false
+  }
+
+]
+

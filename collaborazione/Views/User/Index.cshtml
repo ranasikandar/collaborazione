@@ -1,0 +1,36 @@
+﻿@model UserHomeViewModel
+
+@{
+    ViewData["Title"] = "User Home";
+}
+
+<div class="page-content-wrapper py-3">
+    <div class="container">
+
+        <div class="card user-info-card shadow mb-3">
+            <div class="card-body d-flex align-items-center">
+                <div class="user-info">
+                    <p class="mb-0">Bentornato</p>
+                    <div class="d-flex align-items-center">
+                        <h5 class="mb-1">@Model.UserFullName</h5><span class="badge bg-warning ms-2 rounded-pill">@Model.UserRole</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="card bg-primary mb-3 bg-img" style="background-image: url('img/1.png')">
+                <div class="card-body direction-rtl p-5">
+                    <h2 class="text-white">statistica e profitto</h2>
+                    <p class="mb-4 text-white">Segnalazioni Totali: <span class="badge bg-warning rounded-pill">@Model.States.TotalClients</span></p> @*totalClients*@
+                    <p class="text-white">Provvigioni totali: <span class="badge bg-warning rounded-pill">&#128; @Model.States.TotalCommission</span> da <span class="badge bg-warning rounded-pill">@Model.States.TotalCommissionOfClients</span> segnalazioni</p> @*totalCommition 40 from 2 clients(if commetion is not 0)*@
+                    <p class="text-white">Provvigioni pagate: <span class="badge bg-warning rounded-pill">&#128; @Model.States.TotalCommissionPaid</span> di <span class="badge bg-warning rounded-pill">@Model.States.TotalCommissionPaidOfClients</span> segnalazioni</p> @*commissionPaid 300 of 5 clients(where progress==4)*@
+                    <p class="text-white">Provvigioni da pagare: <span class="badge bg-warning rounded-pill">&#128; @Model.States.TotalProfitBalance</span></p> @*totalProfit 500 (a2-a3)*@
+
+                    <a asp-action="NewClient" asp-controller="User" class="btn btn-success w-100 shadow mb-3 mt-3">Nuova segnalazione</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,32 @@
+﻿@inject IConfiguration _config;
+
+@{
+    Layout = "_LayoutBlank";
+    ViewBag.Title = "Register Success";
+}
+
+<div class="page-content-wrapper py-3">
+    <div class="container">
+        <div class="card">
+            <div class="card-body px-5 text-center">
+
+                <img class="mb-4" src="~/img/email_verity.png" asp-append-version="true" alt="register success">
+
+                <h3>@ViewBag.TitleMessage</h3>
+                <span>@ViewBag.DetailMessage</span>
+
+                <h3>Verify Email</h3>
+                <p>You may get an Email link to verify your email address. check your spam/junk inbox too and follow steps.</p>
+
+                <h5>Do you need Support?</h5>
+                <p>you may simply send us an Email at <a href="mailto:@_config["SupportEmail"]">@_config["SupportEmail"]</a> if you need urgent support.</p>
+
+                <div class="text-center mb-4">
+                    <a class="btn m-2 btn-creative btn-success" asp-action="Index" asp-controller="User">Go To Home Page</a>
+                    <a href="javascript:history.back()" class="btn m-2 btn-creative btn-danger">Go Back</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,67 @@
+﻿@model NewClientViewModel
+
+@{
+    ViewData["Title"] = "Nuova segnalazione";//new client
+}
+
+<div class="page-content-wrapper py-3">
+
+    <div class="container">
+        <div class="element-heading">
+            <h6>Nuova segnalazione</h6>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <div asp-validation-summary="All">
+                    <div class="alert custom-alert-1 alert-warning alert-dismissible fade show msgtitle" role="alert">
+                        <i class="bi bi-exclamation-circle"></i>Please Fix the Following Errors
+                    </div>
+                </div>
+                <form asp-action="NewClient" asp-controller="User" method="post">
+                    <div class="form-group text-start mb-4 mt-3">
+                        <label class="form-label" asp-for="Name"></label>
+                        <input asp-for="Name" class="form-control">
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group text-start mb-4">
+                        <label class="form-label" asp-for="SurName"></label>
+                        <input asp-for="SurName" class="form-control">
+                        <span asp-validation-for="SurName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group text-start mb-4">
+                        <label class="form-label" asp-for="Phone"></label>
+                        <input asp-for="Phone" class="form-control">
+                        <span asp-validation-for="Phone" class="text-danger"></span>
+                    </div>
+
+                    @*<div class="form-check mb-3">
+                            <input class="form-check-input" type="radio" value="r" name="rdbRentSale" asp-for="Rent" checked>
+                            <label class="form-check-label" asp-for="Rent"></label>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="radio" value="s" name="rdbRentSale" asp-for="Sale">
+                            <label class="form-check-label" asp-for="Sale"></label>
+                        </div>*@
+
+                    @foreach (var item in Model.ForOptions)
+                    {<div class="form-check form-check-inline mb-4">
+                            <input class="form-check-input" asp-for="SelectedFor" type="radio" value="@item.ForId" /> @item.ForName
+                            <span asp-validation-for="SelectedFor" class="text-danger"></span>
+                        </div>
+                    }
+
+                    <div class="form-group text-start mb-4">
+                        <label class="form-label" asp-for="Address"></label>
+                        <textarea asp-for="Address" class="form-control"></textarea>
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+                    <button class="btn btn-primary w-100" id="btnAddNewClient" value="addNewClient" type="submit"><span>Nuova segnalazione</span></button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

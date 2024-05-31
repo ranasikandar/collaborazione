@@ -1,0 +1,71 @@
+x if app is installed open app from home/index "install page"
+--
+x open app from notification action in serviceworker.js
+--
+X remove unusing fn from ~/js/active.js
+--
+X upd name,desccription, etc in manifest.json
+--
+X upd /wwwroot/register-sw.js
+X upd logo
+--
+X upd serviceworker.js v1.4
+--
+
+Da contattare=To contact
+In elaborazione=in processing
+Confermata=confirmed
+Commissione pagata=commission paid
+Calcolo commissione=commission calculation
+Da ricevere profitto=to recive profit
+--
+upd applicationServerKey in register-sw.js
+X uncomment //e.preventDefault(); from /wwwroot/register-sw.js
+--
+X change to this 
+
+<a id="InstallApp" style="display:none;" class="btn btn-warning btn-lg w-100">Install</a>
+
+from
+<a id="InstallApp" class="btn btn-warning btn-lg w-100">Install</a>
+
+file /views/home/index.cshtml
+---
+--
+add copyright on install pg
+
+check browser doenst suport pwa redirect fn register-sw.js
+--
+upd register-sw.js
+upd view
+upd offline.html
+upd manifist.json
+upd style.css
+upd active.js
+upd D:\MyProjects\collaborazione\collaborazione\wwwroot\img\
+
+
+===
+window.addEventListener('appinstalled', function(event){
+    setTimeout(function(){
+        presentToUser("<a href='https://myhostname.com' target='_blank'>Go to App</a>")
+    }, 10000)}
+});
+===
+"shortcuts" : [
+  {
+    "name": "Today's agenda",
+    "url": "/today",
+    "description": "List of events planned for today"
+  },
+  {
+    "name": "New event",
+    "url": "/create/event"
+  },
+  {
+    "name": "New reminder",
+    "url": "/create/reminder"
+  }
+]
+
+===

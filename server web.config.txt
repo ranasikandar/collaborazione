@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <location path="." inheritInChildApplications="false">
+    <system.webServer>
+	<httpProtocol allowKeepAlive="true" />
+      <handlers>
+        <add name="aspNetCore" path="*" verb="*" modules="AspNetCoreModuleV2" resourceType="Unspecified" />
+      </handlers>
+      <aspNetCore processPath="dotnet" arguments=".\collaborazione.dll" stdoutLogEnabled="true" stdoutLogFile=".\logs\stdout" hostingModel="OutOfProcess">
+	  <handlerSettings>
+          <handlerSetting name="debugFile" value=".\logs\aspnetcore-debug.log" />
+          <handlerSetting name="debugLevel" value="FILE,ERROR" />
+        </handlerSettings>
+        <environmentVariables>
+          <environmentVariable name="ASPNETCORE_ENVIRONMENT" value="Production" />
+        </environmentVariables>
+		</aspNetCore>
+    </system.webServer>
+  </location>
+</configuration>
+<!--ProjectGuid: 988F0667-B50D-4F52-AA49-D3F074DDFD08 DIR="D:\inutpub\immobiliare-stella.com\collaborazione.immobiliare-stella.com\"-->

@@ -1,0 +1,64 @@
+﻿@inject IConfiguration _config;
+@inject SignInManager<ApplicationUser> signInManager;
+@inject UserManager<ApplicationUser> userManager;
+
+<div class="offcanvas offcanvas-start unselectable" id="affanOffcanvas" data-bs-scroll="true" tabindex="-1" aria-labelledby="affanOffcanvsLabel">
+    <button class="btn-close btn-close-white text-reset" type="button" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    <div class="offcanvas-body p-0">
+        @*Side Nav Wrapper*@
+
+        <form id="frmLogout" asp-controller="Account" asp-action="Logout" method="post">
+
+            <div class="sidenav-wrapper">
+                @*Sidenav Profile*@
+                <div class="sidenav-profile bg-gradient">
+                    <div class="sidenav-style1"></div>
+                    @*<div class="user-profile"><img src="~/img/logo.png" asp-append-version="true" alt="Logo"></div>*@
+                    <div class="user-info">
+                        @if (User.IsInRole("admin"))
+                        {<h5 class="user-name mb-0">Admin</h5>}
+
+                        @{
+                            ApplicationUser user = await userManager.GetUserAsync(User);
+                            <h6 class="user-name mb-0">@user.Name</h6>
+                            <input hidden name="currentUsrName" value="@user.Name" />
+                        }
+
+                    </div>
+                </div>
+                @*Sidenav Nav*@
+                <ul class="sidenav-nav ps-0">
+                    <li><a asp-action="Index" asp-controller="User" class="bi bi-house-door"><i class="sideMenuIcn">Home</i></a></li>
+
+                    <li><a asp-action="ChangePassword" asp-controller="Account" class="bi bi-key"><i class="sideMenuIcn">Change Password</i></a></li>
+
+                    <li>
+                        <div class="night-mode-nav">
+                            <svg class="bi bi-moon" width="18" height="18" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M14.53 10.53a7 7 0 0 1-9.058-9.058A7.003 7.003 0 0 0 8 15a7.002 7.002 0 0 0 6.53-4.47z"></path>
+                            </svg><label for="darkSwitch">Dark mode</label>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input form-check-success" id="darkSwitch" type="checkbox">
+                            </div>
+                        </div>
+                    </li>
+                    @if (User.IsInRole("admin"))
+                    {
+                        <li><a asp-action="Notify" asp-controller="User" class="bi bi-chat-square-dots"><i class="sideMenuIcn">Send Push Notification</i></a></li>
+                        <li><a asp-action="Users" asp-controller="User" class="bi bi-person-badge"><i class="sideMenuIcn">Site Users</i></a></li>
+                    }
+                    <li><a href="#" onclick="document.getElementById('frmLogout').submit()" class="bi bi-door-open"><i class="sideMenuIcn">Logout</i></a></li>
+                    <li><a id="PromptForNotificationAccess" class="bi bi-bell" href="#"><i class="sideMenuIcn">Enable Push Notification</i></a></li>
+                    <li><a onclick="shareData()" href="#" class="bi bi-share"><i class="sideMenuIcn">Share</i></a></li>
+                    @*Condividi con un amico*@
+                </ul>
+                <div class="social-info-wrap"><a href="https://facebook.com target=" _blank""><i class="bi bi-facebook"></i></a><a href="https://twitter.com"><i class="bi bi-twitter"></i></a><a href="/" target="_blank"><i class="bi bi-linkedin"></i></a></div>
+                <div class="copyright-info">
+                    <p>Copyrights &copy; @DateTime.UtcNow.Year <a asp-action="Index" asp-controller="Home" data-toggle="tooltip" data-placement="top" title="Made with ❤ by RanaMSikandar@gmail.com">@_config["AppName"]</a></p>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>

@@ -1,0 +1,37 @@
+﻿@inject IConfiguration _config;
+
+@{
+    Layout = "_LayoutBlank";
+    ViewBag.Title = "Error";
+}
+
+<div class="page-content-wrapper py-3">
+    <div class="container">
+        <div class="card">
+            <div class="card-body px-5 text-center">
+
+                <img class="mb-4" src="~/img/logo.png" asp-append-version="true" alt="error">
+
+                @if (ViewBag.ErrorTitle != null || ViewBag.ErrorMessage != null)
+                {
+                        <h3>@ViewBag.ErrorTitle</h3>
+                        <span>@ViewBag.ErrorMessage</span>
+                        <span>@ViewBag.ErrorDetail</span>
+                 
+                }
+
+                <h3>Oops</h3>
+                <p>We had some technical issue during your last request. But don't worry we are working to fix it meanwhile please try again.</p>
+                
+                <h4>Do you need Support?</h4>
+                <p>you may simply send us an Email at <a href="mailto:@_config["SupportEmail"]">@_config["SupportEmail"]</a> if you need urgent support.</p>
+
+                <div class="text-center mb-4">
+                    <a class="btn m-2 btn-creative btn-success" asp-action="Index" asp-controller="User">Go To Home Page</a>
+                    <a href="javascript:history.back()" class="btn m-2 btn-creative btn-danger">Go Back</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

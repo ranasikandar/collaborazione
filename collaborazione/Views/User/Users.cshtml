@@ -1,0 +1,63 @@
+﻿@model UsersVM
+@{
+    ViewData["Title"] = "Site Users";
+}
+
+
+<div class="page-content-wrapper py-3">
+
+    <div class="container">
+        <div class="element-heading">
+            <h6>Site Users</h6>
+        </div>
+    </div>
+
+    <div class="container mb-4">
+        <div class="card">
+            <div class="card-body">
+                <p>Total Site Users: <span class="badge bg-warning rounded-pill">@Model.TotalSiteUsers</span></p>
+                <p>Admins: <span class="badge bg-warning rounded-pill">@Model.Admins</span></p>
+                <p>Users: <span class="badge bg-warning rounded-pill">@Model.Users</span></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row g-3">
+
+            <div id="searchResults" class="col-12"></div>
+
+            <div id="progress" class="col-12 text-center" style="display:none">
+                <h4>Loading...</h4>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+@section Scripts{
+    <script>
+
+        $(function () {
+            GetUsersData(true);
+
+            $(window).scroll(function () {
+
+                var hT = $('#searchResults').offset().top,
+                    hH = $('#searchResults').outerHeight(),
+                    wH = $(window).height(),
+                    wS = $(this).scrollTop();
+
+                if (!_incallback && !_EOTL) {
+                    if (wS > (hT + hH - wH)) {
+                        _incallback = true;
+                        GetUsersData(false);
+                    }
+                }
+
+            });
+        });
+
+    </script>
+}

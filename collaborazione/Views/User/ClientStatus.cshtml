@@ -1,0 +1,141 @@
+﻿@model ClientViewModel
+
+@{
+    ViewData["Title"] = "Stato Segnalazioni";//client status//Client already added admin can edit
+    @inject SignInManager<ApplicationUser> signInManager;
+}
+
+<div class="page-content-wrapper py-3">
+
+    <div class="container">
+        <div class="element-heading">
+            <h6>Stato Segnalazioni</h6>
+        </div>
+    </div>
+
+    <div class="container mb-4">
+        <div class="card">
+            <div class="card-body">
+                <h5>Aggiungere da: <span>@Model.ClientAddByUser.Name</span></h5>
+                <p>Data e ora di aggiunta: @Model.AddDateTime.ToString("dd-MM-yyyy hh:mm tt")</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <div asp-validation-summary="All">
+                    <div class="alert custom-alert-1 alert-warning alert-dismissible fade show msgtitle" role="alert">
+                        <i class="bi bi-exclamation-circle"></i>Please Fix the Following Errors
+                    </div>
+                </div>
+                <form asp-action="ClientStatus" asp-controller="User" method="post">
+                    <input asp-for="ClientIdEnc" type="hidden" />
+
+                    @if (User.IsInRole("admin"))
+                    {
+
+                        <div class="form-group text-start mb-4 mt-3">
+                            <label class="form-label" asp-for="Name"></label>
+                            <input asp-for="Name" class="form-control">
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group text-start mb-4">
+                            <label class="form-label" asp-for="SurName"></label>
+                            <input asp-for="SurName" class="form-control">
+                            <span asp-validation-for="SurName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group text-start mb-4">
+                            <label class="form-label" asp-for="Phone"></label>
+                            <input asp-for="Phone" class="form-control">
+                            <span asp-validation-for="Phone" class="text-danger"></span>
+                        </div>
+
+                        @foreach (var item in Model.ForOptions)
+                        {<div class="form-check form-check-inline mb-4">
+                                <input class="form-check-input" asp-for="SelectedFor" type="radio" value="@item.ForId" /> @item.ForName
+                                <span asp-validation-for="SelectedFor" class="text-danger"></span>
+                            </div>
+                        }
+
+                        <div class="form-group text-start mb-4">
+                            <label class="form-label" asp-for="Address"></label>
+                            <textarea asp-for="Address" class="form-control"></textarea>
+                            <span asp-validation-for="Address" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group text-start mb-4">
+                            <label class="form-label" asp-for="EstimatedCommitssion"></label>
+                            <input asp-for="EstimatedCommitssion" class="form-control">
+                            <span asp-validation-for="EstimatedCommitssion" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group text-start mb-4">
+                            <label class="form-label" asp-for="SelectedProgress"></label>
+                            <select class="form-control selectpicker" data-live-search="true" asp-for="SelectedProgress" asp-items="@(new SelectList(Model.ProgressItems,"ProgressId","ProgressName"))">
+                                @*<option value="">Please Select</option>*@
+                            </select>
+                            <p class="mt-1">Data e ora di avanzamento: @Model.ProgressDateTime.ToString("dd-MM-yyyy hh:mm tt")</p>
+                            <span asp-validation-for="SelectedProgress" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group text-start mb-4">
+                            <label class="form-label" asp-for="Note"></label>
+                            <textarea asp-for="Note" class="form-control"></textarea>
+                            <span asp-validation-for="Note" class="text-danger"></span>
+                        </div>
+
+                        <button class="btn btn-primary w-100" id="btnAddNewClient" value="addNewClient" type="submit"><span>Nuova segnalazione</span></button>
+                    }
+                    else
+                    {
+                        <div class="form-group text-start mb-4 mt-3">
+                            <label class="form-label" asp-for="Name"></label>
+                            <input asp-for="Name" class="form-control" disabled>
+                        </div>
+                        <div class="form-group text-start mb-4">
+                            <label class="form-label" asp-for="SurName"></label>
+                            <input asp-for="SurName" class="form-control" disabled>
+                        </div>
+                        <div class="form-group text-start mb-4">
+                            <label class="form-label" asp-for="Phone"></label>
+                            <input asp-for="Phone" class="form-control" disabled>
+                        </div>
+
+                        @foreach (var item in Model.ForOptions)
+                        {<div class="form-check form-check-inline mb-4">
+                                <input class="form-check-input" asp-for="SelectedFor" type="radio" value="@item.ForId" disabled /> @item.ForName
+                            </div>
+                        }
+
+                        <div class="form-group text-start mb-4">
+                            <label class="form-label" asp-for="Address"></label>
+                            <textarea asp-for="Address" class="form-control" disabled></textarea>
+                        </div>
+
+                        <div class="form-group text-start mb-4">
+                            <label class="form-label" asp-for="EstimatedCommitssion"></label>
+                            <input asp-for="EstimatedCommitssion" class="form-control" disabled>
+                        </div>
+
+                        <div class="form-group text-start mb-4">
+                            <label class="form-label" asp-for="SelectedProgress"></label>
+                            <select class="form-control selectpicker" data-live-search="true" asp-for="SelectedProgress" asp-items="@(new SelectList(Model.ProgressItems,"ProgressId","ProgressName"))" disabled>
+                            </select>
+                            <p class="mt-1">Data e ora di avanzamento: @Model.ProgressDateTime.ToString("dd-MM-yyyy hh:mm tt")</p>
+                        </div>
+
+                        <div class="form-group text-start mb-4">
+                            <label class="form-label" asp-for="Note"></label>
+                            <textarea asp-for="Note" class="form-control" disabled></textarea>
+                        </div>
+                    }
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>

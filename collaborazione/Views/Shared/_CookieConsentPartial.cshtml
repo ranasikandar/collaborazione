@@ -1,0 +1,42 @@
+﻿@using Microsoft.AspNetCore.Http.Features
+
+@{
+    var consentFeature = Context.Features.Get<ITrackingConsentFeature>();
+    var showBanner = !consentFeature?.CanTrack ?? false;
+    var cookieString = consentFeature?.CreateConsentCookie();
+}
+
+@if (showBanner)
+{
+<div class="modal fade" id="privacyPolicyModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" id="staticBackdropLabel">Privacy & Cookies Policy</h6>
+                <button class="btn btn-close p-1 ms-auto" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="mb-0">We use cookies to make your online experience smooth and better. You consent to this by clicking on "I Agree" For more information, See our <a asp-area="" asp-controller="Home" asp-action="PrivacyPolicy" target="_blank">Privacy Policy</a>, <a asp-area="" asp-controller="Home" asp-action="TermsAndConditions" target="_blank">Terms And Conditions</a>.</p>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-outline-secondary btn-sm" data-cookie-string="@cookieString">I Agree</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <script type="text/javascript">
+        (function () {
+            var button = document.querySelector("#privacyPolicyModal a[data-cookie-string]");
+            button.addEventListener("click", function (event) {
+                document.cookie = button.dataset.cookieString;
+                $('#privacyPolicyModal').modal('hide');
+            }, false);
+        })();
+
+        $(window).on('load', function () {
+            $('#privacyPolicyModal').modal('show');
+        });
+
+    </script>
+}
